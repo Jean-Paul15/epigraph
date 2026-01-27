@@ -1,0 +1,103 @@
+# Notes de travail
+.api-notes.md
+
+# Environnement et secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+*.crt
+id_rsa*
+credentials*.json
+
+# Python
+__pycache__/
+*.py[cod]
+*.so
+.venv/
+venv/
+env/
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Node / Next.js
+node_modules/
+.next/
+out/
+.turbo/
+*.tsbuildinfo
+next-env.d.ts
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Builds
+dist/
+build/
+
+# Modèles ML et binaires
+backend/models/*
+!backend/models/.gitkeep
+*.pkl
+*.joblib
+*.h5
+*.onnx
+*.pt
+*.bin
+
+# Données (générées, volumineuses)
+data/csv/*
+!data/csv/.gitkeep
+data/raw/
+data/processed/
+neo4j/data/
+neo4j/logs/
+neo4j/import/
+neo4j/plugins/
+neo4j_data/
+neo4j_logs/
+*.csv
+*.parquet
+*.db
+*.sqlite
+
+# Documents et archives
+*.pdf
+*.zip
+*.tar
+*.tar.gz
+*.7z
+*.rar
+*.docx
+*.pptx
+*.xlsx
+
+# Sorties, logs, temporaires
+*.log
+logs/
+output/
+outputs/
+*.tmp
+*.temp
+*.cache
+*.bak
+last_trained.txt
+
+# Éditeurs et système
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+desktop.ini

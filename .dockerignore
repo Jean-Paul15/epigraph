@@ -1,0 +1,14 @@
+node_modules
+__pycache__
+*.pyc
+.git
+.vscode
+.idea
+.next
+dist
+build
+*.log
+.env
+.api-notes.md
+data/csv/*.csv
+notebooks/.ipynb_checkpoints
