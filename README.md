@@ -1,6 +1,26 @@
-# EpiGraph
-
-Qui a contaminé qui, où, et quel hôpital a fini par en payer le prix ? EpiGraph répond à ces questions en suivant les chaînes d'infection comme un graphe Neo4j, de la simulation des données jusqu'au tableau de bord.
+<div align="center">
+  <h1>EpiGraph</h1>
+  <p><b>Qui a contaminé qui, où, et quel hôpital a fini par en payer le prix ? EpiGraph suit les chaînes d'infection comme un graphe Neo4j, de la simulation des données jusqu'au tableau de bord.</b></p>
+<p>
+  <img src="https://img.shields.io/badge/Neo4j-4581C3?style=for-the-badge&logo=neo4j&logoColor=white" alt="Neo4j"/>
+  <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python"/>
+  <img src="https://img.shields.io/badge/FastAPI-009688?style=for-the-badge&logo=fastapi&logoColor=white" alt="FastAPI"/>
+  <img src="https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white" alt="Next.js"/>
+  <img src="https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript"/>
+  <img src="https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white" alt="Docker"/>
+</p>
+<p>
+  <img src="https://img.shields.io/badge/Licence-Tous%20droits%20r%C3%A9serv%C3%A9s-lightgrey?style=flat-square" alt="Licence"/>
+  <img src="https://img.shields.io/badge/Langage-Python-3776AB?style=flat-square" alt="Langage principal : Python"/>
+</p>
+<p>
+  <a href="#démarrer-en-cinq-minutes">Démarrer</a> ·
+  <a href="#architecture">Architecture</a> ·
+  <a href="#stack-technique">Stack</a> ·
+  <a href="#structure-du-dépôt">Structure</a> ·
+  <a href="#tests">Tests</a>
+</p>
+</div>
 
 ## Ce que ça apporte
 
@@ -30,7 +50,7 @@ Le tableau de bord ouvre sur http://localhost:3000. La documentation Swagger de 
 
 Si le téléchargement des séries JHU échoue, le générateur bascule sur un jeu de repli de 30 régions. Sous Windows, `scripts/epigraph.ps1` (commandes `start`, `stop`, `restart`, `destroy`, `status`, `logs`) enchaîne ces étapes. Détails dans [docs/QUICKSTART.md](docs/QUICKSTART.md).
 
-## Comment ça marche
+## Architecture
 
 ```mermaid
 flowchart LR
@@ -52,17 +72,17 @@ Trois choix structurent le projet.
 
 **Un modèle entraîné au premier lancement.** `backend/start.sh` attend Neo4j, entraîne le modèle s'il n'existe pas dans `backend/models/`, puis lance Uvicorn. L'API répond avec un modèle prêt, sans étape manuelle. Le réentraînement se fait avec `docker compose exec backend python train_model.py`.
 
-## Stack
+## Stack technique
 
-| Couche | Technologies |
-|---|---|
-| Base de données | Neo4j 5.15 (édition Enterprise, plugins GDS et APOC), Cypher |
-| Backend | Python 3.11, FastAPI, Pydantic, driver Neo4j |
-| Machine learning | scikit-learn, pandas, numpy, joblib |
-| Génération de données | Python, pandas, numpy |
-| Frontend | Next.js 14, React 18, TypeScript, Tailwind CSS, Recharts, D3, Leaflet, react-force-graph-3d |
-| Notebooks | Jupyter (image `jupyter/scipy-notebook`) |
-| Orchestration | Docker, Docker Compose |
+| Domaine | Technologies | Rôle dans le projet |
+|---|---|---|
+| Données | <img src="https://img.shields.io/badge/Neo4j-4581C3?style=flat-square&logo=neo4j&logoColor=white" alt="Neo4j"/> <img src="https://img.shields.io/badge/Cypher-4581C3?style=flat-square" alt="Cypher"/> <img src="https://img.shields.io/badge/GDS-4581C3?style=flat-square" alt="GDS"/> <img src="https://img.shields.io/badge/APOC-4581C3?style=flat-square" alt="APOC"/> | Graphe unique des patients, lieux, événements et infections ; algorithmes de graphes (Neo4j 5.15 Enterprise). |
+| Génération de données | <img src="https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white" alt="Python"/> <img src="https://img.shields.io/badge/pandas-150458?style=flat-square&logo=pandas&logoColor=white" alt="pandas"/> <img src="https://img.shields.io/badge/NumPy-013243?style=flat-square&logo=numpy&logoColor=white" alt="NumPy"/> | Simulation de type SEIR à graine fixe, production des CSV. |
+| Intelligence artificielle | <img src="https://img.shields.io/badge/scikit--learn-F7931E?style=flat-square&logo=scikitlearn&logoColor=white" alt="scikit-learn"/> <img src="https://img.shields.io/badge/pandas-150458?style=flat-square&logo=pandas&logoColor=white" alt="pandas"/> <img src="https://img.shields.io/badge/NumPy-013243?style=flat-square&logo=numpy&logoColor=white" alt="NumPy"/> <img src="https://img.shields.io/badge/joblib-4C4C4C?style=flat-square" alt="joblib"/> | RandomForest de risque alimenté par des variables extraites du graphe. |
+| Backend | <img src="https://img.shields.io/badge/Python%203.11-3776AB?style=flat-square&logo=python&logoColor=white" alt="Python 3.11"/> <img src="https://img.shields.io/badge/FastAPI-009688?style=flat-square&logo=fastapi&logoColor=white" alt="FastAPI"/> <img src="https://img.shields.io/badge/Pydantic-E92063?style=flat-square&logo=pydantic&logoColor=white" alt="Pydantic"/> <img src="https://img.shields.io/badge/Pytest-0A9EDC?style=flat-square&logo=pytest&logoColor=white" alt="Pytest"/> | API REST, services d'analyse, prédiction et tests du prédicteur. |
+| Interface | <img src="https://img.shields.io/badge/Next.js%2014-000000?style=flat-square&logo=nextdotjs&logoColor=white" alt="Next.js 14"/> <img src="https://img.shields.io/badge/React%2018-61DAFB?style=flat-square&logo=react&logoColor=black" alt="React 18"/> <img src="https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white" alt="TypeScript"/> <img src="https://img.shields.io/badge/Tailwind%20CSS-06B6D4?style=flat-square&logo=tailwindcss&logoColor=white" alt="Tailwind CSS"/> <img src="https://img.shields.io/badge/Recharts-22B5BF?style=flat-square" alt="Recharts"/> <img src="https://img.shields.io/badge/D3-F9A03C?style=flat-square&logo=d3dotjs&logoColor=white" alt="D3"/> <img src="https://img.shields.io/badge/Leaflet-199900?style=flat-square&logo=leaflet&logoColor=white" alt="Leaflet"/> <img src="https://img.shields.io/badge/react--force--graph--3d-333333?style=flat-square" alt="react-force-graph-3d"/> | Tableau de bord : graphiques, carte et graphe 3D. |
+| Notebooks | <img src="https://img.shields.io/badge/Jupyter-F37626?style=flat-square&logo=jupyter&logoColor=white" alt="Jupyter"/> | Exploration, Cypher, GDS, entraînement, visualisation, comparaison SQL / Neo4j. |
+| Infrastructure | <img src="https://img.shields.io/badge/Docker-2496ED?style=flat-square&logo=docker&logoColor=white" alt="Docker"/> <img src="https://img.shields.io/badge/Docker%20Compose-2496ED?style=flat-square&logo=docker&logoColor=white" alt="Docker Compose"/> | Orchestration de cinq services et import automatique dans Neo4j. |
 
 L'image Neo4j est l'édition Enterprise, acceptée via `NEO4J_ACCEPT_LICENSE_AGREEMENT=yes` dans la configuration. Vérifiez que cet usage est conforme à vos conditions.
 
@@ -80,6 +100,8 @@ docs/               Architecture, démarrage rapide, Cypher, ML, FAQ
 .env.example        Variables d'environnement factices
 docker-compose.yml  Orchestration des 5 services
 ```
+
+## Tests
 
 Les tests du prédicteur de risque tournent sans Neo4j :
 
